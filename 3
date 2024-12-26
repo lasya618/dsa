@@ -1,0 +1,59 @@
+#include <stdio.h>
+
+int queue[100], choice, front = -1, rear = -1, x, i, n;
+
+void enqueue(void);
+void dequeue(void);
+void display(void);
+
+int main() {
+    front = rear = -1;
+    printf("\nEnter the size of the queue [max:100]: ");
+    scanf("%d", &n);
+    printf("\n\tQUEUE OPERATIONS USING ARRAYS");
+    printf("\n\t1.ENQUEUE\n\t2.DEQUEUE\n\t3.DISPLAY\n\t4.EXIT\n");
+    do {
+        printf("Enter the choice: ");
+        scanf("%d", &choice);
+        switch (choice) {
+            case 1: enqueue(); break;
+            case 2: dequeue(); break;
+            case 3: display(); break;
+            case 4: printf("\nEXIT POINT"); break;
+            default: printf("\nPLEASE ENTER A VALID OPTION");
+        }
+    } while (choice != 4);
+    return 0;
+}
+
+void enqueue() {
+    if (rear == n - 1) {
+        printf("\n\tQUEUE OVERFLOW\n");
+    } else {
+        printf("\nEnter a value to be enqueued: ");
+        scanf("%d", &x);
+        if (front == -1) front = 0;
+        queue[++rear] = x;
+    }
+}
+
+void dequeue() {
+    if (front == -1 || front > rear) {
+        printf("\n\nQUEUE IS UNDERFLOW\n");
+    } else {
+        printf("\n\tThe dequeued value is %d\n", queue[front++]);
+        if (front > rear) front = rear = -1;
+    }
+}
+
+void display() {
+    if (front == -1) {
+        printf("\nThe queue is empty!!\n");
+    } else {
+        printf("\nThe elements in the queue are: \n");
+        for (i = front; i <= rear; i++) {
+            printf("%d ", queue[i]);
+        }
+        printf("\nPress next choice\n");
+    }
+}
